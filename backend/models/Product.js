@@ -74,6 +74,11 @@ const productSchema=new mongoose.Schema({
         required:true,
         min:0
     },
+    category: {
+      type: String,
+      required: true,
+      enum: ['electronics', 'clothing', 'food', 'furniture', 'books']  // Example categories
+    } 
 })
 // Create the product model
 const Product = mongoose.model('Product', productSchema);

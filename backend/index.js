@@ -23,6 +23,24 @@ mongoose.connect('mongodb://127.0.0.1:27017/shopApp')//shopApp is the name of th
         console.log(err);
     });
 
+const ProductService=require("./controllers/Product/ProductService");
+const productService = new ProductService();
+const newProductData={
+    productId:"jjj",
+    seller:"lllll",
+    productName:"lllll",
+    description:"lllll",
+    quantity:1,
+    price:2,
+    category:"food"   
+}
+
+try{
+    productService.insertProduct(newProductData);
+}catch(error){
+    console.log(error)
+    throw error
+}
 
 
 app.get('/',async (req,res)=>{

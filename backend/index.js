@@ -26,6 +26,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/shopApp')//shopApp is the name of th
 const Product=require("./models/product")
 const ProductService=require("./controllers/Product/ProductService");
 const productService = new ProductService();
+
 /*
 const newProductData={
     productId:"jjj",
@@ -37,13 +38,13 @@ const newProductData={
     category:"food"   
 }
 const newProductData1={
-//     productId:"jjj0",
-//     seller:"lllll",
-//     productName:"lllll",
-//     description:"lllll",
-//     quantity:1,
-//     price:2,
-//     category:"food"   
+    productId:"jjj0",
+    seller:"lllll",
+    productName:"lllll",
+    description:"lllll",
+    quantity:1,
+    price:2,
+    category:"food"   
 }
 
 try{
@@ -71,8 +72,11 @@ async function jjk(){
   } 
   
 jjk();
-*/
 
+
+const popo=productService.updateProduct(kpo);
+console.log(popo)
+*/
 
 app.get('/',async (req,res)=>{
     res.send("hello world");
@@ -80,3 +84,24 @@ app.get('/',async (req,res)=>{
 app.listen("200",async()=>{
     console.log("server is working");
 });
+
+const kpo={
+    productId:"jjj0",
+    seller:"8888lllll",
+    productName:"9990000",
+    description:"99999000",
+    quantity:1,
+    price:2,
+    category:"books"   
+}
+async function mm(){
+    try{
+        const up=await productService.updateProduct(kpo);
+        console.log(up)
+    }catch(error){
+        console.log(error)
+        throw error
+    }
+}
+
+mm();

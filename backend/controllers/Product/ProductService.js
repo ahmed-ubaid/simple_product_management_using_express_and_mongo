@@ -43,7 +43,20 @@ class ProductService{
     }
   }
 
-  
+  async updateProduct(newItem){
+    
+    try{
+      const ProductP=await Product.findOne({productId:newItem.productId})
+      const updatedProduct=await Product.findByIdAndUpdate(ProductP._id,newItem,{
+          new: true,  // Return the updated document
+          runValidators: true  // Ensure validation is run on the updated data
+        });
+      return updatedProduct
+    }catch(error){
+      console.log(error)
+      throw error
+    }
+  }
 }
 
 module.exports=ProductService

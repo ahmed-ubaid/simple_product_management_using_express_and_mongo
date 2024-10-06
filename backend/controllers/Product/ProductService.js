@@ -16,14 +16,36 @@ class ProductService{
     
     await newProduct.save();
     console.log(`${newProduct.name} by ${newProduct.seller} has been added to the database`)
-    
 
     }catch(error){
       console.log("error inserting product",error)
       throw error
     }
   }
+
+  async getAllProducts(){
+    try{
+      const products=await Product.find();
+      return products;
+    }catch(error){
+      console.log("error ",error);
+      throw error;
+    }
+  }
+
+  async getProduct(prodID){
+    try{
+      const prod=await Product.findOne({productId:prodID})
+      return prod;
+    }catch(error){
+      console.log(error);
+      throw error
+    }
+  }
+
+  
 }
+
 module.exports=ProductService
 /*
 // middleware/Product/ProductService.js
@@ -31,23 +53,6 @@ const Product = require('../../models/Product');
 
 class ProductService {
   // Insert a new product
-  async insertProduct(productData) {
-    try {
-      const newProduct = new Product({
-        name: productData.name,
-        price: productData.price,
-        quantity: productData.quantity,
-        description: productData.description,
-      });
-
-      const savedProduct = await newProduct.save();
-      console.log('Product added successfully:', savedProduct);
-      return savedProduct;
-    } catch (error) {
-      console.error('Error inserting product:', error);
-      throw error;
-    }
-  }
 
   // Get all products
   async getAllProducts() {

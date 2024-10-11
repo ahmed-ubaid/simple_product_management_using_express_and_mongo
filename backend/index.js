@@ -124,8 +124,9 @@ app.get('/products',async(req,res)=>{
     }
 })
 app.get('/productOne',async (req,res)=>{
+    const {productName}=req.body
     try{
-        const product=await productService.getProductByName("lllll")
+        const product=await productService.getProductByName(productName)
         res.send(product)
     }catch(error){
         console.log(error)

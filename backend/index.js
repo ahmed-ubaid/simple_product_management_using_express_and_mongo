@@ -23,7 +23,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/shopApp')//shopApp is the name of th
         console.log(err);
     });
 
-const Product=require("./models/product")
+
 const ProductService=require("./controllers/Product/ProductService");
 const productService = new ProductService();
 
@@ -55,7 +55,6 @@ app.post('/addProduct',async(req,res)=>{
         throw error
     }
 })
-
 app.post('/update',async (req,res)=>{
     const {productId,
         seller,
@@ -83,6 +82,33 @@ app.post('/update',async (req,res)=>{
         throw error
     }
 
+})
+app.post('/delete',async (req,res)=>{
+    const {productId,
+        seller,
+        productName,
+        description,
+        quantity,
+        price,
+        category
+      }=req.body
+    const obj={
+        productId:productId,
+        seller:seller,
+        productName:productName,
+        description:description,
+        quantity:quantity,
+        price:price,
+        category:category
+    }
+
+    try{
+        const prod=productService.deleteProduct(obj.product)
+        console.log(prod)
+    }catch(error){
+        console.log(error)
+        throw error
+    }
 })
 
 app.get('/',async (req,res)=>{

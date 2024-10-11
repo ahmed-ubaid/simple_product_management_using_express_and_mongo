@@ -27,6 +27,101 @@ const Product=require("./models/product")
 const ProductService=require("./controllers/Product/ProductService");
 const productService = new ProductService();
 
+
+
+app.post('/addProduct',async(req,res)=>{
+    const {productId,
+        seller,
+        productName,
+        description,
+        quantity,
+        price,
+        category
+      }=req.body
+    const obj={
+        productId:productId,
+        seller:seller,
+        productName:productName,
+        description:description,
+        quantity:quantity,
+        price:price,
+        category:category
+    }
+
+    try{
+        await productService.insertProduct(obj);
+    }catch(error){
+        console.log(error)
+        throw error
+    }
+})
+
+app.post('/update',async (req,res)=>{
+    const {productId,
+        seller,
+        productName,
+        description,
+        quantity,
+        price,
+        category
+      }=req.body
+    const obj={
+        productId:productId,
+        seller:seller,
+        productName:productName,
+        description:description,
+        quantity:quantity,
+        price:price,
+        category:category
+    }
+
+    try{
+        const prod=productService.updateProduct(obj)
+        console.log(prod)
+    }catch(error){
+        console.log(error)
+        throw error
+    }
+
+})
+
+app.get('/',async (req,res)=>{
+    res.send("hello world");
+})
+app.get('/products',async(req,res)=>{
+    try{
+        const allProdutcs=await productService.getAllProducts();
+        res.send(allProdutcs)
+    }catch(error){
+        console.log(error)
+        throw error
+    }
+})
+app.get('/productOne',async (req,res)=>{
+    try{
+        const product=await productService.getProductByName("lllll")
+        res.send(product)
+    }catch(error){
+        console.log(error)
+        throw error
+    }
+})
+
+
+app.listen("200",async()=>{
+    console.log("server is working");
+});
+
+const kpo={
+    productId:"jjj0",
+    seller:"8888lllll",
+    productName:"9990000",
+    description:"99999000",
+    quantity:1,
+    price:2,
+    category:"books"   
+}
+
 /*
 const newProductData={
     productId:"jjj",
@@ -76,24 +171,7 @@ jjk();
 
 const popo=productService.updateProduct(kpo);
 console.log(popo)
-*/
 
-app.get('/',async (req,res)=>{
-    res.send("hello world");
-})
-app.listen("200",async()=>{
-    console.log("server is working");
-});
-
-const kpo={
-    productId:"jjj0",
-    seller:"8888lllll",
-    productName:"9990000",
-    description:"99999000",
-    quantity:1,
-    price:2,
-    category:"books"   
-}
 async function mm(){
     try{
         const up=await productService.updateProduct(kpo);
@@ -105,3 +183,18 @@ async function mm(){
 }
 
 mm();
+
+
+async function mm(){
+    try{
+        
+        const up=await productService.deleteProduct(kpo);
+        console.log(up.product)
+    }catch(error){
+        console.log(error)
+        throw error
+    }
+}
+
+mm();
+*/

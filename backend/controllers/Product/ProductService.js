@@ -15,7 +15,7 @@ class ProductService{
       })
     
     await newProduct.save();
-    console.log(`${newProduct.name} by ${newProduct.seller} has been added to the database`)
+    console.log(`${newProduct.productName} by ${newProduct.seller} has been added to the database`)
 
     }catch(error){
       console.log("error inserting product",error)
@@ -43,6 +43,16 @@ class ProductService{
     }
   }
 
+  async getProductByName(name){
+    try{
+      const prod=await Product.findOne({productName:name})
+      return prod;
+    }catch(error){
+      console.log(error)
+      throw error
+    }
+  }
+
   async updateProduct(newItem){
     
     try{
@@ -52,6 +62,18 @@ class ProductService{
           runValidators: true  // Ensure validation is run on the updated data
         });
       return updatedProduct
+    }catch(error){
+      console.log(error)
+      throw error
+    }
+  }
+
+  async deleteProduct(prod){
+    try{
+        const ProductP=await Product.findOne({productId:prod.productId})
+        const deletedProduct=await Product.findByIdAndDelete(ProductP._id)
+        if (!deletedProduct) throw new Error('Product not found');
+            return { message: 'Product deleted',product: deletedProduct};
     }catch(error){
       console.log(error)
       throw error

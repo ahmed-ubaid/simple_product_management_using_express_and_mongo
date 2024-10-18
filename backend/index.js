@@ -111,10 +111,8 @@ app.post('/delete',async (req,res)=>{
     }
 })
 
-app.get('/',async (req,res)=>{
-    res.send("hello world");
-})
-app.get('/products',async(req,res)=>{
+
+app.get('/',async(req,res)=>{
     try{
         const allProdutcs=await productService.getAllProducts();
         res.send(allProdutcs)

@@ -115,7 +115,7 @@ app.post('/delete',async (req,res)=>{
 app.get('/',async(req,res)=>{
     try{
         const allProdutcs=await productService.getAllProducts();
-        res.send(allProdutcs)
+        res.json({message:allProdutcs})
     }catch(error){
         console.log(error)
         throw error
@@ -137,15 +137,6 @@ app.listen("200",async()=>{
     console.log("server is working");
 });
 
-const kpo={
-    productId:"jjj0",
-    seller:"8888lllll",
-    productName:"9990000",
-    description:"99999000",
-    quantity:1,
-    price:2,
-    category:"books"   
-}
 
 /*
 const newProductData={
@@ -222,4 +213,26 @@ async function mm(){
 }
 
 mm();
+
+
+const kpo={
+    productId:"jjj0",
+    seller:"8888lllll",
+    productName:"9990000",
+    description:"99999000",
+    quantity:1,
+    price:2,
+    category:"books"   
+}
+
+async function popo(){
+    try{
+      const prod=await productService.getAllProducts();
+      console.log(prod)
+    }catch(error){
+      console.log("Some error occured")
+    }
+  }
+  
+  popo()
 */

@@ -3,7 +3,7 @@ import { useState } from "react";
 import axios from 'axios'
 
 
-export default function Add(){
+export default function AddProduct(){
 
     const [product, setProduct] = useState({
         productId:'',
@@ -31,6 +31,7 @@ export default function Add(){
         e.preventDefault()
         try{
           await axios.post('http://localhost:200/addProduct',product)
+          
           setProduct({
             productId:'',
             seller:'',

@@ -82,6 +82,24 @@ class ProductService{
 }
 
 module.exports=ProductService
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 // middleware/Product/ProductService.js
 const Product = require('../../models/Product');
@@ -151,3 +169,4 @@ class ProductService {
 
 module.exports = ProductService;
 */
+

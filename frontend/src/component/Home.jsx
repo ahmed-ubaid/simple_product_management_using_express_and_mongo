@@ -1,17 +1,27 @@
 import { useState,useEffect } from "react";
-import {Link,Navigate} from "react-router-dom"
+import {Link,useNavigate} from "react-router-dom"
 import axios from "axios"
 
 
 export default function Home(){
     const [data,setData]=useState([])
-    
+    const navigate = useNavigate();
+
     const fetchData=async ()=>{
         try{
             const AllData=await axios.get('http://localhost:200/')
             setData(AllData.data.message)
         }catch(error){
             console.log("some error occured")
+        }
+    }
+
+    const handleClick=(productId)=>{
+        try{
+            navigate(`/product/${productId}`,)
+        }catch(error){
+            console.log("some error occured")
+            throw(error)
         }
     }
 
@@ -24,8 +34,10 @@ export default function Home(){
         <div>
         {data.length > 0 ? (
                     data.map((product) => (
-                        <div key={product._id}>
-                            <h2>{product.productName}</h2>
+                        <div key={product._id} style={{margin:'20px'}}>
+                            <div onClick={()=>handleClick(product._id)}>
+                                {product.productName}
+                            </div>
                         </div>
                     ))
                 ) : (

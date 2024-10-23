@@ -35,7 +35,7 @@ class ProductService{
 
   async getProduct(prodID){
     try{
-      const prod=await Product.findOne({productId:prodID})
+      const prod=await Product.findOne({_id:prodID})
       return prod;
     }catch(error){
       console.log(error);

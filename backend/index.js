@@ -121,11 +121,11 @@ app.get('/',async(req,res)=>{
         throw error
     }
 })
-app.get('/productOne',async (req,res)=>{
-    const {productName}=req.body
+app.get('/product/:productId',async (req,res)=>{
+    const productId=req.params.productId
     try{
-        const product=await productService.getProductByName(productName)
-        res.send(product)
+        const product=await productService.getProduct(productId)
+        res.json({message:product})
     }catch(error){
         console.log(error)
         throw error

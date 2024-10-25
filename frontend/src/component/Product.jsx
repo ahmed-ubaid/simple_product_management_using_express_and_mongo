@@ -1,5 +1,5 @@
 import { useState,useEffect } from "react"
-import { useParams } from 'react-router-dom';
+import {Link,useNavigate,useParams} from "react-router-dom"
 import axios from "axios"
 
 export default function Product(){
@@ -14,7 +14,6 @@ export default function Product(){
             console.log("An error occured")
             throw(error)
         }
-
     }
 
     useEffect(()=>{
@@ -23,6 +22,12 @@ export default function Product(){
 
 
     return(<>
-        {prod.productName}
+        <div>name:- {prod.productName}</div>
+        <div>productId:- {prod.productId}</div>
+        <div>seller:- {prod.seller}</div>
+        <div>description:- {prod.description}</div>
+        <div>quantity:- {prod.quantity}</div>
+        <div>price:- {prod.price}</div>
+        <div>category:- {prod.category}</div>
     </>)
 }

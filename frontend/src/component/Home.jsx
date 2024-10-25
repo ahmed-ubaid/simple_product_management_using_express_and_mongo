@@ -24,6 +24,15 @@ export default function Home(){
             throw(error)
         }
     }
+    
+    const handleUpdate=(productId)=>{
+        try{
+            navigate(`/update/${productId}`,)
+        }catch(error){
+            console.log("some error occured")
+            throw(error)
+        }
+    }
 
     useEffect(()=>{
         fetchData()
@@ -38,6 +47,14 @@ export default function Home(){
                             <div onClick={()=>handleClick(product._id)}>
                                 {product.productName}
                             </div>
+
+                            <button onClick={()=>handleUpdate(product._id)}>
+                                update
+                            </button>
+
+                            <button>
+                                delete
+                            </button>
                         </div>
                     ))
                 ) : (

@@ -55,7 +55,7 @@ app.post('/addProduct',async(req,res)=>{
         throw error
     }
 })
-app.post('/update',async (req,res)=>{
+app.post('/update/:productId',async (req,res)=>{
     const {productId,
         seller,
         productName,
@@ -75,8 +75,9 @@ app.post('/update',async (req,res)=>{
     }
 
     try{
-        const prod=productService.updateProduct(obj)
+        const prod=await productService.updateProduct(obj)
         console.log(prod)
+        res.json({ message: 'ok' })
     }catch(error){
         console.log(error)
         throw error
@@ -122,13 +123,23 @@ app.get('/',async(req,res)=>{
     }
 })
 app.get('/product/:productId',async (req,res)=>{
+    const {productId}=req.params
+    try{
+        const product=await productService.getProduct(productId)
+        res.json({message:product})
+    }catch(error){
+        console.log(error)
+        throw(error)
+    }
+})
+app.get('/update/:productId',async(req,res)=>{
     const productId=req.params.productId
     try{
         const product=await productService.getProduct(productId)
         res.json({message:product})
     }catch(error){
         console.log(error)
-        throw error
+        throw(error)
     }
 })
 
